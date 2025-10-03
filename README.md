@@ -14,15 +14,6 @@
 
 ---
 
-##  Installation
-
-1. Open Chrome and go to `chrome://extensions/`.  
-2. Turn on **Developer mode** (top-right corner).  
-3. Click **Load unpacked** and select the project folder.  
-4. The extension icon will appear in your toolbar.
-
----
-
 ##  How to Use
 
 1. Click the **Smart Research Assistant** icon in your Chrome toolbar.  
