@@ -1,53 +1,51 @@
-
 # Smart Research Assistant
 
-A Chrome extension designed to help researchers streamline their workflow by summarizing articles, generating insights, and managing research tasks efficiently.
+**Smart Research Assistant** is a Chrome extension built to help students and researchers work smarter. It can summarize articles, generate insights, and make your research faster and easier.
 
 ---
 
-## Features
+##  Features
 
-- **Content Summarization:** Quickly summarize web pages, articles, and research papers.
-- **Research Assistance:** Generate ideas, insights, or explanations based on your selected content.
-- **Easy-to-Use Interface:** Simple and intuitive design accessible from your browser toolbar.
-- **Persistent Storage:** Save your tasks and summaries directly within the extension.
-- **Lightweight & Fast:** Minimal impact on browser performance.
-
----
-
-## Installation
-
-1. Open Chrome and go to `chrome://extensions/`.
-2. Enable **Developer mode** (top-right corner).
-3. Click **Load unpacked** and select the project folder.
-4. The Smart Research Assistant icon should appear in your toolbar.
+- **Summarize Content:** Get quick summaries of articles, research papers, or web pages.  
+- **Generate Insights:** Help with ideas, explanations, or important points from the content.  
+- **Easy to Use:** Simple design, accessible directly from your browser.  
+- **Save Tasks:** Keep your summaries and notes organized within the extension.  
+- **Lightweight:** Fast and smooth without slowing down your browser.
 
 ---
 
-## Usage
+##  Installation
 
-1. Click the Smart Research Assistant icon in your Chrome toolbar.
-2. Select the type of research task you want to perform (e.g., Summarize, Generate Insights).
-3. The extension will process the content on the page and display results in a side panel.
-4. Copy or save your results for future reference.
-
----
-
-## Configuration
-
-- **API Keys:**  
-  If the extension uses APIs (like AI summarization), make sure to add your API key in the configuration file (`config.js` or `.env` if used).
-
-- **Permissions:**  
-  Ensure the extension has access to active tabs and storage for smooth functionality.
+1. Open Chrome and go to `chrome://extensions/`.  
+2. Turn on **Developer mode** (top-right corner).  
+3. Click **Load unpacked** and select the project folder.  
+4. The extension icon will appear in your toolbar.
 
 ---
 
-## Contributing
+##  How to Use
 
-Contributions are welcome! Feel free to submit issues or pull requests to improve the extension.
+1. Click the **Smart Research Assistant** icon in your Chrome toolbar.  
+2. Choose what you want to do: **Summarize** or **Generate Insights**.  
+3. The results will appear in a side panel.  
+4. Copy or save your notes for later use.
 
 ---
+
+## 🔧 Configuration
+
+- **API Keys:** If the extension uses APIs for AI features, add your key in the configuration file (`config.js` or `.env`).  
+- **Permissions:** Make sure the extension has access to active tabs and storage.
+
+---
+
+##  Contribution
+
+Even as a fresher, you can contribute! Open issues or pull requests to help improve the extension.
+
+---
+
+
 
 
 
