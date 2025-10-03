@@ -32,7 +32,7 @@
 
 ---
 
-## 🔧 Configuration
+## Configuration
 
 - **API Keys:** If the extension uses APIs for AI features, add your key in the configuration file (`config.js` or `.env`).  
 - **Permissions:** Make sure the extension has access to active tabs and storage.
