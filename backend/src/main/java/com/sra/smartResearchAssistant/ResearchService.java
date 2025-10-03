@@ -11,23 +11,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Service
 public class ResearchService {
 
-    @Value("${gemini.api.key}") 
+    @Value("${gemini.api.key}")
     private String geminiApiKey;
 
-    @Value("${gemini.api.url}") 
+    @Value("${gemini.api.url}")
     private String geminiApiUrl;
 
     private final WebClient webClient;
     private final ObjectMapper objectMapper;
 
-    public ResearchService(WebClient.Builder webClientBuilder){
+    public ResearchService(WebClient.Builder webClientBuilder) {
         this.webClient = webClientBuilder.build();
         this.objectMapper = new ObjectMapper();
     }
 
-    public String processContent(ResearchRequest request){
+    public String processContent(ResearchRequest request) {
         String prompt = buildPrompt(request);
 
+        // Gemini request body
         Map<String, Object> requestBody = Map.of(
             "contents", new Object[]{
                 Map.of("parts", new Object[]{
@@ -36,26 +37,37 @@ public class ResearchService {
             }
         );
 
-        String response = webClient.post()
-                                   .uri(geminiApiUrl)
-                                   .header("Authorization", "Bearer " + geminiApiKey)
-                                   .bodyValue(requestBody)
-                                   .retrieve()
-                                   .bodyToMono(String.class)
-                                   .block();
+        try {
+            // Send request to Gemini API
+            String response = webClient.post()
+                    .uri(geminiApiUrl)
+                    .bodyValue(requestBody)
+                    .retrieve()
+                    .bodyToMono(String.class)
+                    .block();
 
-        return extractTextFromResponse(response);        
+            // Debug log
+            System.out.println("Gemini Raw Response: " + response);
+
+            // Parse and extract text
+            return extractTextFromResponse(response);
+
+        } catch (Exception e) {
+            e.printStackTrace(); // log stacktrace
+            return "Error calling Gemini API: " + e.getMessage();
+        }
     }
 
-    private String extractTextFromResponse(String response){
+    private String extractTextFromResponse(String response) {
         try {
             GeminiResponse geminiResponse = objectMapper.readValue(response, GeminiResponse.class);
 
             if (geminiResponse.getCandidates() != null && !geminiResponse.getCandidates().isEmpty()) {
                 GeminiResponse.Candidate firstCandidate = geminiResponse.getCandidates().get(0);
-                if (firstCandidate.getContent() != null 
-                    && firstCandidate.getContent().getParts() != null 
-                    && !firstCandidate.getContent().getParts().isEmpty()) {
+
+                if (firstCandidate.getContent() != null
+                        && firstCandidate.getContent().getParts() != null
+                        && !firstCandidate.getContent().getParts().isEmpty()) {
 
                     return firstCandidate.getContent().getParts().get(0).getText();
                 }
@@ -67,9 +79,10 @@ public class ResearchService {
         }
     }
 
-    private String buildPrompt(ResearchRequest request){
+    private String buildPrompt(ResearchRequest request) {
         StringBuilder prompt = new StringBuilder();
-        switch (request.getOperation()){
+
+        switch (request.getOperation().toLowerCase()) {
             case "summarize":
                 prompt.append("Provide a clear and concise summary of the following text:\n\n");
                 break;
@@ -79,6 +92,7 @@ public class ResearchService {
             default:
                 throw new IllegalArgumentException("Invalid operation: " + request.getOperation());
         }
+
         prompt.append(request.getContent());
         return prompt.toString();
     }
